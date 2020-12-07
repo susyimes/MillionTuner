@@ -1,0 +1,3 @@
+include ':pitch'
+include ':app'
+rootProject.name = "MillionTuner"

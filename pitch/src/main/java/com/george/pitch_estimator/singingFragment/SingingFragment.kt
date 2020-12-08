@@ -61,6 +61,7 @@ class SingingFragment : Fragment(),
     private lateinit var singRecorder: SingRecorder
     private lateinit var pitchModelExecutor: PitchModelExecutor
     val compositeDisposable = CompositeDisposable()
+    var text:String=""
 
     // Permissions
     var PERMISSION_ALL = 123
@@ -81,6 +82,7 @@ class SingingFragment : Fragment(),
 
         binding.viewModelxml = viewModel
 
+
         //Check for permissions
         initialize()
 
@@ -96,7 +98,7 @@ class SingingFragment : Fragment(),
                     val handler = Handler()
                     handler.post(object : Runnable {
                         override fun run() {
-                            all_pitches.text = all_pitches.text.toString() + list
+                            text += list
                             when (list[i]) {
                                 "C2" -> binding.webView.loadUrl("javascript:myMove('125')")
                                 "C#2" -> binding.webView.loadUrl("javascript:myMoveSharp('125')")
@@ -234,8 +236,7 @@ class SingingFragment : Fragment(),
     }
 
     override fun onDestroy() {
-        if (all_pitches.text != null) {
-            val text = all_pitches.text.toString()
+        if (text.isNotEmpty()) {
             val score = Score()
             score.text = text
             score.time = System.currentTimeMillis()

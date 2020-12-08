@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         ImmersionBar.with(this).statusBarDarkFont(true) .navigationBarColor("#ffffff").navigationBarDarkIcon(true).init()
 
-        title_name.setOnClickListener {
+        history.setOnClickListener {
             startActivity(Intent(this@MainActivity,HistoryActivity::class.java))
         }
 

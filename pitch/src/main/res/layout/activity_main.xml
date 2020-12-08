@@ -28,6 +28,15 @@
             android:layout_gravity="center_horizontal|bottom"
             />
 
+        <ImageView
+            android:id="@+id/history"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="10dp"
+            android:src="@android:drawable/ic_menu_recent_history"
+            />
+
     </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

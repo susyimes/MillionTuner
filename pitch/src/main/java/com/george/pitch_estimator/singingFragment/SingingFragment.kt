@@ -31,11 +31,14 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.george.pitch_estimator.ObjectBox
 import com.george.pitch_estimator.PitchModelExecutor
 import com.george.pitch_estimator.R
 import com.george.pitch_estimator.SingRecorder
 import com.george.pitch_estimator.databinding.FragmentFirstBinding
 import com.george.pitch_estimator.permission.RxPermissions
+import com.george.pitch_estimator.scores.Score
+import io.objectbox.kotlin.boxFor
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.fragment_first.*
@@ -61,6 +64,7 @@ class SingingFragment : Fragment(),
 
     // Permissions
     var PERMISSION_ALL = 123
+
     // App saves .wav audio file inside external storage of phone so anyone can compare
     // results with the colab notebook output. For that purpose this permission is mandatory
     var PERMISSIONS = arrayOf(
@@ -92,7 +96,7 @@ class SingingFragment : Fragment(),
                     val handler = Handler()
                     handler.post(object : Runnable {
                         override fun run() {
-                            //all_pitches.text = all_pitches.text.toString() + list
+                            all_pitches.text = all_pitches.text.toString() + list
                             when (list[i]) {
                                 "C2" -> binding.webView.loadUrl("javascript:myMove('125')")
                                 "C#2" -> binding.webView.loadUrl("javascript:myMoveSharp('125')")
@@ -182,6 +186,7 @@ class SingingFragment : Fragment(),
         //Toast.makeText(activity, "Singing has stopped", Toast.LENGTH_LONG).show()
     }
 
+
     private fun animateSharkButton() {
         val animation = AnimationUtils.loadAnimation(activity, R.anim.scale_anim)
         binding.buttonAnimated.startAnimation(animation)
@@ -224,10 +229,18 @@ class SingingFragment : Fragment(),
                         activity?.finish()
                     }
                 }
-            }))
+            })
+        )
     }
 
     override fun onDestroy() {
+        if (all_pitches.text != null) {
+            val text = all_pitches.text.toString()
+            val score = Score()
+            score.text = text
+            score.time = System.currentTimeMillis()
+            ObjectBox.boxStore.boxFor<Score>().put(score)
+        }
         super.onDestroy()
         compositeDisposable.clear()
     }

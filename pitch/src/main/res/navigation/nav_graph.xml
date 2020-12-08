@@ -10,9 +10,5 @@
         android:name="com.george.pitch_estimator.singingFragment.SingingFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first"/>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.george.pitch_estimator.ui.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second"/>
+
 </navigation>

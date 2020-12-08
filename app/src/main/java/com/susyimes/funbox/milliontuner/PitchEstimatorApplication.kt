@@ -1,6 +1,7 @@
 package com.susyimes.funbox.milliontuner
 
 import android.app.Application
+import com.george.pitch_estimator.ObjectBox
 import com.george.pitch_estimator.di.singingFragmentModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,6 +15,7 @@ class PitchEstimatorApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        ObjectBox.init(this)
         startKoin {
             //androidContext(applicationContext)
             androidContext(this@PitchEstimatorApplication)

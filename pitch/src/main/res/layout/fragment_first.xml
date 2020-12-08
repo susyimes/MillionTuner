@@ -22,6 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#ffffff"
             >
 
             <TextView
@@ -88,7 +89,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewHertz" />
-
+            <ImageView
+                android:id="@+id/bottomImg"
+                android:layout_width="match_parent"
+                android:layout_height="425dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/main_pic"
+                />
             <TextView
                 android:id="@+id/textViewHertz"
                 android:layout_width="wrap_content"
@@ -97,8 +105,11 @@
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+
+
+                app:layout_constraintTop_toTopOf="@+id/bottomImg"
+                android:textColor="#999999"
+
                 android:onClick="@{()->viewModelxml.changeWay()}"
                 app:noteArrayListToString="@{viewModelxml.noteValuesToDisplay}" />
 
@@ -112,6 +123,8 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:visibility="gone"
                 />
+
+
 
 
 
